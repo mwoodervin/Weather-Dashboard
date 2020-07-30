@@ -6,6 +6,10 @@ body {
     font-family: 'Red Rose', cursive;
 }
 
+.text-center {
+  text-align: center;
+}
+
 #current-day {
   text-align: right;
 }
@@ -13,6 +17,37 @@ body {
 div.search-area {
   font-size: 12 px;
   text-align: left;
+  margin: 15px;
+}
+
+#inputlabel {
+  color: rgb(71, 69, 69);
+  font-size: 10px;
+  text-align: center;
+}
+/* #inputstring {
+  width: 110px;
+} */
+
+#weather-intro {
+  text-align: left;
+  margin: 10px;
+}
+
+.uvhigh {
+  background-color: red;
+}
+
+.uvmedium {
+  background-color: orange;
+}
+
+.uvlow {
+  background-color: blue;
+}
+
+.card-body {
+  background-color: lightblue;
 }
 
 div.hero-image {

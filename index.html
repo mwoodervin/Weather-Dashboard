@@ -25,10 +25,11 @@
         </div>
     </div> -->
 
+    <!-- Banner at the top of the page -->
     <div class="hero-image">
         <div class="hero-text col-9">
             <h1>Welcome to Weather Dash</h1>
-            <p>Your source for current weather & 5-day forecasts</p>
+            <p>Your source for current weather conditions & 5-day forecasts</p>
         </div>
         <br>
         <div id="current-day"></div>
@@ -36,22 +37,35 @@
 
     <hr>
 
-    <div class="container">
+    <!-- container for the search input and search button -->
+
+    <div class="container-fluid">
         <div class="row">
-
-            <!-- This is the search input and button  -->
-            <div class="search-area col-md-2">
+            <!-- column for search area -->
+            <div class="search-area col-md-3">
+                <label id="inputlabel" for="inputstring">search forecast by zip code</label>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input id="inputstring" class="form-control mr-sm-1" type="search" placeholder="5-digit zip"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search"></i> search</button>
                 </form>
-
             </div>
-            <div id="weather-intro" class="col-md-8"></div>
+            <!-- Column for City and current stats -->
+            <div id="weather-intro" class="col-md-8">
+                <h2>City name and current conditions</h2>
+                <p>Temperature: </p>
+                <p>Humidity: </p>
+                <p>Wind Speed: </p>
+                <p>UV Index: </p>
+            </div>
+        </div>
+        <br>
+        <div class=row>
+            <div class=col-md-2></div>
 
-            <!-- This is where the city name will be -->
-            <h2 id="intro">To find the weather in any city, enter its name in the search field to the left and click
-                "search."</h2>
+        <div class=col-sm-12></div>
+            <h3>5-day Forecast</h3>
         </div>
 
         <div class="row hide">
@@ -59,44 +73,64 @@
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <img class="card-img-top" src="./assets/Ice Climber.jpg" alt="Card image cap">
+                <!-- <img class="card-img-top" alt="Card image cap"> -->
                 <div class="card-body">
-                    <p class="card-text">Weather blurb</p>
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <img class="card-img-top" src="./assets/Ice Climber.jpg" alt="Card image cap">
+                <!-- <img class="card-img-top" alt="Card image cap"> -->
                 <div class="card-body">
-                    <p class="card-text">Weather blurb</p>
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <img class="card-img-top" src="./assets/Ice Climber.jpg" alt="Card image cap">
+                <!-- <img class="card-img-top" alt="Card image cap"> -->
                 <div class="card-body">
-                    <p class="card-text">Weather blurb</p>
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <img class="card-img-top" src="./assets/Ice Climber.jpg" alt="Card image cap">
+                <!-- <img class="card-img-top" alt="Card image cap"> -->
                 <div class="card-body">
-                    <p class="card-text">Weather blurb</p>
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="card"></div>
-                <img class="card-img-top" src="./assets/Ice Climber.jpg" alt="Card image cap">
+                <!-- <img class="card-img-top" alt="Card image cap"> -->
                 <div class="card-body">
-                    <p class="card-text">Weather blurb</p>
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
                 </div>
             </div>
         </div>
 
+<footer>
+    <small class="text-center">
+        Mary W. Ervin | Project 06 | Weather Dashboard
+    </small>
+</footer>
 
     </div>
 
@@ -104,17 +138,10 @@
 
 
 
-
-
-
-
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src=./assets/script.js></script>
 
 </body>
 
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src=./assets/script.js></script>
+</html>
