@@ -43,22 +43,16 @@
         <div class="row">
             <!-- column for search area -->
             <div class="search-area col-md-3">
-                <label id="inputlabel" for="inputstring">search forecast by zip code</label>
+                <label id="inputlabel">search forecast by zip code</label>
                 <form class="form-inline my-2 my-lg-0">
-                    <input id="inputstring" class="form-control mr-sm-1" type="search" placeholder="5-digit zip"
+                    <input id="input-string" class="form-control mr-sm-1" type="search" placeholder="5-digit zip"
                         aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    <button id="search-button" class="btn btn-outline-success my-2 my-sm-0" type="submit">
                         <i class="fa fa-search"></i> search</button>
                 </form>
             </div>
             <!-- Column for City and current stats -->
-            <div id="weather-intro" class="col-md-8">
-                <h2>City name and current conditions</h2>
-                <p>Temperature: </p>
-                <p>Humidity: </p>
-                <p>Wind Speed: </p>
-                <p>UV Index: </p>
-            </div>
+            <div id="weather-intro" class="col-md-8"></div>
         </div>
         <br>
         <div class=row>
@@ -68,23 +62,12 @@
             <h3>5-day Forecast</h3>
         </div>
 
-        <div class="row hide">
-            <div class="col-2"></div>
+        <section id="forecast-row" class="row hide">
+            <!-- <div class="col-2"></div>
 
-            <div class="col-md-2">
+            <section class="col-md-2">
                 <div class="card"></div>
-                <!-- <img class="card-img-top" alt="Card image cap"> -->
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="card"></div>
-                <!-- <img class="card-img-top" alt="Card image cap"> -->
+                <img class="card-img-top" alt="Card image cap">
                 <div class="card-body">
                     <p>Date</p>
                     <p><i class="conditions"></i>weather logo</p>
@@ -95,7 +78,7 @@
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <!-- <img class="card-img-top" alt="Card image cap"> -->
+                <img class="card-img-top" alt="Card image cap">
                 <div class="card-body">
                     <p>Date</p>
                     <p><i class="conditions"></i>weather logo</p>
@@ -106,7 +89,18 @@
 
             <div class="col-md-2">
                 <div class="card"></div>
-                <!-- <img class="card-img-top" alt="Card image cap"> -->
+                <img class="card-img-top" alt="Card image cap">
+                <div class="card-body">
+                    <p>Date</p>
+                    <p><i class="conditions"></i>weather logo</p>
+                    <p class="card-text">Temp: </p>
+                    <p class="card-text">Humidity</p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card"></div>
+                <img class="card-img-top" alt="Card image cap">
                 <div class="card-body">
                     <p>Date</p>
                     <p><i class="conditions"></i>weather logo</p>
@@ -116,15 +110,15 @@
             </div>
             <div class="col-md-2">
                 <div class="card"></div>
-                <!-- <img class="card-img-top" alt="Card image cap"> -->
+                <img class="card-img-top" alt="Card image cap">
                 <div class="card-body">
                     <p>Date</p>
                     <p><i class="conditions"></i>weather logo</p>
                     <p class="card-text">Temp: </p>
                     <p class="card-text">Humidity</p>
                 </div>
-            </div>
-        </div>
+            </div>  -->
+        </section>
 
 <footer>
     <small class="text-center">
