@@ -44,12 +44,12 @@ $.ajax ({
     // to get the weather icon
     // http://openweathermap.org/img/wn/10d@2x.png
 
-    console.log(((response.main.temp)* 9/5 - 459.67).toFixed());
+    console.log(((response.main.temp)* 9/5 - 459.67).toFixed(0));
     let queryForecastURL = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + apiKey;
     
     $.ajax ({
         url: queryForecastURL,
-        method: "GET"
+        method: "GET"  
     })
     .then(function(forecast) {
 
@@ -57,11 +57,29 @@ $.ajax ({
         let cityNameEl = $('<h2 id="city-name">'+ response.name +'</h2>');
         // let weatherIcon = $('<i id="weather-icon"></i>');
         let degreesFEl = $('<p id="degrees-f">Temperature: '+ (forecast.current.temp * 9/5 -459.67.toFixed(0)) +'</p>');
-        let humidityEl = $('<p id="humidity">Humidity: '+ forecast.current.humidity +'</p>');
+        let humidityEl = $('<p id="humidity">Humidity: '+ forecast.current.humidity + '% </p>');
         let windSpeedEl = $('<p id="wind-speed">Wind Speed: '+forecast.current.wind_speed +' </p>');
         let uvIndexEl = $('<p id="uv-index">UV Index: '+ forecast.current.uvi +'</p>');
         console.log($("#weather-intro"));
         $("#weather-intro").append(cityNameEl, degreesFEl, humidityEl, windSpeedEl, uvIndexEl);
+
+        let uvIndex = forecast.current.uvi;
+
+        if(uvIndex <= 2) {
+            uvIndexEl.css("background-color", "green")
+        }
+        else if(uvIndex > 2 && uvIndex <= 5) {
+            uvIndexEl.css("background-color", "yellow")
+        }
+        else if(uvIndex > 5 && uvIndex <= 7) {
+            uvIndexEl.css("background-color", "orange")
+        }
+        else if(uvIndex > 7 && uvIndex <= 10) {
+            uvIndexEl.css("background-color", "red")
+        }
+        else if(uvIndex > 10) {
+            uvIndexEl.css("background-color", "purple")
+        }
 
 // append dummy column
 
