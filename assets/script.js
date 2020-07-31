@@ -56,13 +56,14 @@ $.ajax ({
         console.log(forecast);
         let cityNameEl = $('<h2 id="city-name">'+ response.name +'</h2>');
         // let weatherIcon = $('<i id="weather-icon"></i>');
-        let degreesFEl = $('<p id="degrees-f">Temperature: '+ (forecast.current.temp * 9/5 -459.67.toFixed(0)) +'</p>');
+        let degreesFEl = $('<p id="degrees-f">Temperature: '+ (forecast.current.temp * 9/5 -459.67).toFixed(0) +'F</p>');
         let humidityEl = $('<p id="humidity">Humidity: '+ forecast.current.humidity + '% </p>');
-        let windSpeedEl = $('<p id="wind-speed">Wind Speed: '+forecast.current.wind_speed +' </p>');
+        let windSpeedEl = $('<p id="wind-speed">Wind Speed: '+forecast.current.wind_speed +'MPH</p>');
         let uvIndexEl = $('<p id="uv-index">UV Index: '+ forecast.current.uvi +'</p>');
         console.log($("#weather-intro"));
         $("#weather-intro").append(cityNameEl, degreesFEl, humidityEl, windSpeedEl, uvIndexEl);
 
+        // color coding for UV Index
         let uvIndex = forecast.current.uvi;
 
         if(uvIndex <= 2) {
