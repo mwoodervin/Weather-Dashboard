@@ -1,8 +1,10 @@
 $(document).ready(function () {
 
     let today = moment();
-    console.log(today);
+    // console.log(today);
     let currentWeatherDiv = $("#weather-intro");
+
+    let cityList = JSON.parse(localStorage.getItem("cityList")) || [];
 
     $("#current-day").text(today.format("dddd | LL | h mm a"));
 
@@ -18,19 +20,20 @@ $(document).ready(function () {
     $(searchButton).on("click", function (event) {
         event.preventDefault();
         currentWeatherDiv.val();
-
-        getWeatherData();
+        let zipCode = $("#input-string").val().trim();
+        getWeatherData(zipCode);
 
     });
+    getWeatherData("03885"); 
 
     // Function to query the Weather API
-    function getWeatherData() {
+    function getWeatherData(zip) {
 
         // get zip code 
-        let zipCode = $("#input-string").val().trim();
-        console.log(zipCode);
 
-        let queryURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + "&appid=" + apiKey;
+        // console.log(zipCode);
+
+        let queryURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "&appid=" + apiKey;
 
         $.ajax({
             url: queryURL,
@@ -38,6 +41,8 @@ $(document).ready(function () {
         })
             .then(function (response) {
                 console.log(response);
+                cityList.push(zip);
+                localStorage.setItem("cityList", JSON.stringify(cityList));
 
                 let lon = (response.coord.lon);
                 let lat = (response.coord.lat);
@@ -62,6 +67,8 @@ $(document).ready(function () {
                         let humidityEl = $('<p id="humidity">Humidity: ' + forecast.current.humidity + '% </p>');
                         let windSpeedEl = $('<p id="wind-speed">Wind Speed: ' + forecast.current.wind_speed + 'MPH</p>');
                         let uvIndexEl = $('<p id="uv-index">UV Index: ' + forecast.current.uvi + '</p>');
+                        
+                        $("#weather-intro").empty();
 
                         $("#weather-intro").append(cityNameEl, degreesFEl, humidityEl, windSpeedEl, uvIndexEl);
 
@@ -85,32 +92,36 @@ $(document).ready(function () {
                         }
 
                         // build forecast block
-                        let emptyDiv = $('<div class="col-md-2"></div>');
-                        let sectionEl = $('<section class="col-md-2"></section>');
+                        // let emptyDiv = $('<div class="col-md-2">');
+                        let beginColumnEl = $('<div class="col-md-1">');
+                        let endColumnEl = $('<div class="col-md-1">');
                         let cardEl;
+                        let ForecastRowEl = $("#forecast-row");
 
-                        for (i = 0; i < 6; i++) {
-                            i++
+                        ForecastRowEl.empty();
 
-                            let cardEl = $('< class="card"></div>');
+                        ForecastRowEl.append(beginColumnEl);
+
+                        for (i = 1; i < 6; i++) {
+                            // card container
+                            let cardEl = $('<div class="card"></div>');
+                            // card body
                             let cardBodyEl = $('<div class="card-body"></div>');
+                            // sibling elements in the card body
                             let forecastDay = $('<p>Today</p>');
-                            let weatherIcon = $('<img id="forecast-icon" src=http://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '@2x.png alt="weather icon"</img>');
-                            let forecastTempEl = $('<p class="card-text">Temperature: ' + (forecast.daily[i].temp * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
-                            let forecastHumidityEl = $('<p class="card-text">Humidity: ' + forecast.daily[i].humidity + '% </p>');
-                            
-                            console.log(i);
-                            console.log(weatherIcon);
-                            console.log(forecastTempEl);
-                            console.log(forecastHumidityEl);
-                            console.log("got this far");
-                            cardBodyEl.append(forecastDay, weatherIcon, forecastTempEl, forecastHumidityEl);
-                            cardEl.append(cardBodyEl);
+                            let weatherIcon = $('<img id="forecast-icon" src="http://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '@2x.png" alt="weather icon"</img>');
+                            let forecastTempEl = $('<p id="card-text">Temperature: ' + (forecast.daily[i].temp.day * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
+                            let forecastHumidityEl = $('<p id="card-text">Humidity: ' + forecast.daily[i].humidity + '% </p>');
+                            let forecastColumn = $('<div class="col col-md-2">');
+
+                            cardBodyEl.append(forecastDay, forecastTempEl, forecastHumidityEl);
+                            cardEl.append(weatherIcon, cardBodyEl);
+                            ForecastRowEl.append((forecastColumn.append(cardEl)));
 
                         }
 
-                        sectionEl.append(emptyDiv, cardEl);
-                        $('#forecast-row').append(sectionEl);
+                        ForecastRowEl.append(endColumnEl);
+
 
                         // loop through forecast appending columns
                         /* <div class="col-md-2"> = variable
@@ -121,15 +132,17 @@ $(document).ready(function () {
                             <p><i class="conditions"></i>weather logo</p>
                             <p class="card-text">Temp: </p>
                             <p class="card-text">Humidity</p>
-                            then start appending the <p> to the card-body
-                            then append card-body to card
-                            then append card to col-md-2
-                            then append col-md-2 to forecast-row
+                            then start appending the <p> to the card-body - line 109
+                            then append card-body to card - line 110
+                            then append card to col-md-2 - line 113
+                            then append col-md-2 to forecast-row - line 114
                         </div>
                         </div> */
 
 
-                        // append dummy column
+// still have to add recently searched cities to column on left
+// function so that when weather dashboard is opened, current
+// forecast for most recently-searched city is displayeds
 
                     });
             });

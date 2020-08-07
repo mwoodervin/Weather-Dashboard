@@ -16,122 +16,54 @@
 
 <body>
 
-    <!-- Hero -->
-
-    <!-- <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Fluid jumbotron</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-        </div>
-    </div> -->
-
     <!-- Banner at the top of the page -->
     <div class="hero-image">
-        <div class="hero-text col-9">
-            <h1>Welcome to Weather Dash</h1>
-            <p>Your source for current weather conditions & 5-day forecasts</p>
-        </div>
+        <!-- <div class="hero-text"> -->
+        <h1>Welcome to Weather Dash</h1>
+        <p>Your source for current weather conditions & 5-day forecasts</p>
+        <!-- </div> -->
         <br>
         <div id="current-day"></div>
     </div>
 
-    <hr>
-
-    <!-- container for the search input and search button -->
+    <!-- Container for Search Input and Search Button -->
 
     <div class="container-fluid">
         <div class="row">
-            <!-- column for search area -->
-            <div class="search-area col-md-3">
+            <!-- Column for Search Area -->
+            <div id="search-area" class="search-area col-md-3">
                 <label id="inputlabel">search forecast by zip code</label>
-                <form class="form-inline my-2 my-lg-0">
-                    <input id="input-string" class="form-control mr-sm-1" type="search" placeholder="5-digit zip"
+                <div class="input-group">
+                    <input id="input-string" class="form-control" type="search" placeholder="5-digit zip"
                         aria-label="Search">
-                    <button id="search-button" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                        <i class="fa fa-search"></i> search</button>
-                </form>
+                    <button id="search-button" class="btn btn-outline-success" type="submit">
+                        <i class="fa fa-search"></i></button>
+                </div>
             </div>
-            <!-- Column for City and current stats -->
-            <div id="weather-intro" class="col-md-8"></div>
+
+            <!-- Column for City and Current Day Weather -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div id="weather-intro" class="col-md-12">
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <br>
-        <!-- Five-day forecast title -->
-        <div class=row>
-            <div class=col-md-2></div>
-
-        <div class=col-sm-12></div>
-            <h3>5-day Forecast</h3>
+        <!-- Div for 5-day Forecast Output -->
+        <!-- Five-day Forecast Title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3>5-day Forecast</h3>
+                <div class="row" id="forecast-row"></div>
+            </div>
         </div>
-
-        <section id="forecast-row" class="row">
-            <!-- <div class="col-2"></div>
-
-            <section class="col-md-2">
-                <div class="card"></div>
-                <img class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="card"></div>
-                <img class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="card"></div>
-                <img class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="card"></div>
-                <img class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card"></div>
-                <img class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <p>Date</p>
-                    <p><i class="conditions"></i>weather logo</p>
-                    <p class="card-text">Temp: </p>
-                    <p class="card-text">Humidity</p>
-                </div>
-            </div>  -->
-        </section>
-
-<footer>
-    <small class="text-center">
-        Mary W. Ervin | Project 06 | Weather Dashboard
-    </small>
-</footer>
-
     </div>
 
-
-
-
+    <footer class="footer mt-auto py-3">
+        <span class="text-muted footer-text">Mary W. Ervin | Weather Dashboard Project | August 2020
+        </span>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
