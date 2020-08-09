@@ -2,10 +2,10 @@ $(document).ready(function () {
 
     let today = moment();
     let currentWeatherDiv = $("#weather-intro");
-    let zipCode;
+    let cityName;
     let listItem;
     
-    // create a stored array of zip codes
+    // create a stored array of city names
     let cityList = JSON.parse(localStorage.getItem("cityList")) || [];
 
     $("#current-day").text(today.format("dddd | LL | h mm a"));
@@ -26,32 +26,31 @@ $(document).ready(function () {
     $(searchButton).on("click", function (eventOne) {
         eventOne.preventDefault();
         currentWeatherDiv.val();
-        zipCode = $("#input-string").val().trim();
-        getWeatherData(zipCode);
-        let listItem = $(`<li class="btn list-group-item searched-city">${zipCode}</li>`);
+        cityName = $("#input-string").val().trim();
+        getWeatherData(cityName);
+        let listItem = $("<button>").text(cityName).addClass("btn border searched-city m-1").attr("value", cityName);
         $(".recently-searched").append(listItem);
-        // $(".recently-searched").append($(`<li class="list-group-item searched-city">${zipCode}</li>`));
+        $(this).prev().val("");
     });
 
-    // When click on a previously-searched zip code
-    $(listItem).on("click", function() {
-        console.log("clicked");
-        // eventTwo.preventDefault();
-        getWeatherData(listItem.val());
+    // When click on a previously-searched city, access weather for that city
+    $(document).on("click", ".searched-city", function() {
+        getWeatherData($(this).val());
     })
+
     // Function to query the Weather API
-    function getWeatherData(zip) {
+    function getWeatherData(city) {
 
-        // get zip code 
+        // get city code 
 
-        let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${zip}&appid=${apiKey}`;
+        let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
         $.ajax({
             url: queryURL,
             method: "GET"
         })
             .then(function (response) {
-                cityList.unshift(zip);
+                cityList.unshift(city);
                 localStorage.setItem("cityList", JSON.stringify(cityList));
 
                 let lon = (response.coord.lon);
@@ -67,7 +66,8 @@ $(document).ready(function () {
                     method: "GET"
                 })
                     .then(function (forecast) {
-                        let weatherTodayIconEl = $('<img id="today-forecast-icon" src="https://openweathermap.org/img/wn/' + forecast.daily[0].weather[0].icon + '@2x.png" alt="weather icon"</img>');
+                        console.log(forecast);
+                        let weatherTodayIconEl = $('<img id="today-forecast-icon" src="https://openweathermap.org/img/wn/' + forecast.daily[0].weather[0].icon + '.png" alt="weather icon"</img>');
                         let cityNameEl = $('<h2 id="city-name">' + response.name + "   Today" + '</h2>');
                         let degreesFEl = $('<p id="degrees-f">Temperature: ' + (forecast.current.temp * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
                         let humidityEl = $('<p id="humidity">Humidity: ' + forecast.current.humidity + '% </p>');
