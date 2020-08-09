@@ -35,7 +35,7 @@ $(document).ready(function () {
 
         // get zip code 
 
-        let queryURL = `http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}`;
+        let queryURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}`;
 
         $.ajax({
             url: queryURL,
@@ -51,16 +51,15 @@ $(document).ready(function () {
                 // to get the weather icon
                 // http://openweathermap.org/img/wn/10d@2x.png
 
-                let queryForecastURL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}`;
+                let queryForecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}`;
 
                 $.ajax({
                     url: queryForecastURL,
                     method: "GET"
                 })
                     .then(function (forecast) {
-
+                        let weatherTodayIconEl = $('<img id="today-forecast-icon" src="https://openweathermap.org/img/wn/' + forecast.daily[0].weather[0].icon + '@2x.png" alt="weather icon"</img>');
                         let cityNameEl = $('<h2 id="city-name">' + response.name + '</h2>');
-                        // let weatherIcon = $('<i id="weather-icon"></i>');
                         let degreesFEl = $('<p id="degrees-f">Temperature: ' + (forecast.current.temp * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
                         let humidityEl = $('<p id="humidity">Humidity: ' + forecast.current.humidity + '% </p>');
                         let windSpeedEl = $('<p id="wind-speed">Wind Speed: ' + forecast.current.wind_speed + 'MPH</p>');
@@ -68,7 +67,7 @@ $(document).ready(function () {
                         
                         $("#weather-intro").empty();
 
-                        $("#weather-intro").append(cityNameEl, degreesFEl, humidityEl, windSpeedEl, uvIndexEl);
+                        $("#weather-intro").append(cityNameEl, weatherTodayIconEl, degreesFEl, humidityEl, windSpeedEl, uvIndexEl);
 
                         // color coding for UV Index
                         let uvIndex = forecast.current.uvi;
@@ -94,18 +93,17 @@ $(document).ready(function () {
                         let forecastRowEl = $("#forecast-row");
 
                         forecastRowEl.empty();
-                        console.log(moment().format("MM/DD/YYYY"));
+                        now = moment().add(1, 'days');
 
                         for (i = 1; i < 6; i++) {
-                            firstDay = moment().add([i], 'days').format("MM/DD/YYYY");
                             // card container
                             let cardDeckEl = $('<div class="card-deck"></div>');
                             let cardEl = $('<div class="card text-white bg-primary"></div>');
                             // card body
                             let cardBodyEl = $('<div class="card-body"></div>');
                             // sibling elements in the card body
-                            let forecastDay = $('<p>' + firstDay + '</p>');
-                            let weatherIcon = $('<img id="forecast-icon" src="http://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '@2x.png" alt="weather icon"</img>');
+                            let forecastDay = $('<p>' + now.format("MM/DD/YYYY") + '</p>');
+                            let weatherIcon = $('<img id="forecast-icon" src="https://openweathermap.org/img/wn/' + forecast.daily[i].weather[0].icon + '@2x.png" alt="weather icon"</img>');
                             let forecastTempEl = $('<p id="card-text">Temp: ' + (forecast.daily[i].temp.day * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
                             let forecastHumidityEl = $('<p id="card-text">Humidity: ' + forecast.daily[i].humidity + '% </p>');
                             let forecastColumn = $('<div class="col row-cols-md-2">');
@@ -114,11 +112,11 @@ $(document).ready(function () {
                             cardDeckEl.append(cardEl);
                             cardEl.append(cardBodyEl);
                             forecastRowEl.append((forecastColumn.append(cardDeckEl)));
+                            now.add(1, 'days');
                         }
 
 
 
-// still have to add recently searched cities to column on left
 // function so that when weather dashboard is opened, current
 // forecast for most recently-searched city is displayeds
 
