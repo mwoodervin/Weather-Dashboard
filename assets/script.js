@@ -3,6 +3,7 @@ $(document).ready(function () {
     let today = moment();
     let currentWeatherDiv = $("#weather-intro");
     let zipCode;
+    let listItem;
     
     // create a stored array of zip codes
     let cityList = JSON.parse(localStorage.getItem("cityList")) || [];
@@ -20,22 +21,30 @@ $(document).ready(function () {
     // Load weather data for most recent search when page is loaded
     $(window).on("load", getWeatherData(cityList[0]));
 
-    // CLICK EVENT
-    $(searchButton).on("click", function (event) {
-        event.preventDefault();
+    // EVENT LISTENERS
+    // When click on Search Button
+    $(searchButton).on("click", function (eventOne) {
+        eventOne.preventDefault();
         currentWeatherDiv.val();
         zipCode = $("#input-string").val().trim();
         getWeatherData(zipCode);
-        $(".recently-searched").append($(`<li class="list-group-item searched-city">${zipCode}</li>`));
-
+        let listItem = $(`<li class="btn list-group-item searched-city">${zipCode}</li>`);
+        $(".recently-searched").append(listItem);
+        // $(".recently-searched").append($(`<li class="list-group-item searched-city">${zipCode}</li>`));
     });
 
+    // When click on a previously-searched zip code
+    $(listItem).on("click", function() {
+        console.log("clicked");
+        // eventTwo.preventDefault();
+        getWeatherData(listItem.val());
+    })
     // Function to query the Weather API
     function getWeatherData(zip) {
 
         // get zip code 
 
-        let queryURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}`;
+        let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${zip}&appid=${apiKey}`;
 
         $.ajax({
             url: queryURL,
@@ -59,7 +68,7 @@ $(document).ready(function () {
                 })
                     .then(function (forecast) {
                         let weatherTodayIconEl = $('<img id="today-forecast-icon" src="https://openweathermap.org/img/wn/' + forecast.daily[0].weather[0].icon + '@2x.png" alt="weather icon"</img>');
-                        let cityNameEl = $('<h2 id="city-name">' + response.name + '</h2>');
+                        let cityNameEl = $('<h2 id="city-name">' + response.name + "   Today" + '</h2>');
                         let degreesFEl = $('<p id="degrees-f">Temperature: ' + (forecast.current.temp * 9 / 5 - 459.67).toFixed(0) + 'F</p>');
                         let humidityEl = $('<p id="humidity">Humidity: ' + forecast.current.humidity + '% </p>');
                         let windSpeedEl = $('<p id="wind-speed">Wind Speed: ' + forecast.current.wind_speed + 'MPH</p>');
