@@ -7,7 +7,7 @@ This application is designed to provide accurate daily weather reports and 5-day
 AS a traveler
 I WANT to access accurate weather coniditions for any city in the United States
 SO THAT I can plan 
-
+```
 ## Summary of Features
 - When the applcation is initially loaded, it will search for the most recently accessed city
 - If no city has been previously searched, no weather data will appear
@@ -27,7 +27,6 @@ SO THAT I can plan
     - current conditions icon
     - temperature in degrees F
     - humidity        
-```
 
 ## Seclected Screen Shots
 
@@ -39,3 +38,5 @@ SO THAT I can plan
 ## Application URL:
 https://mwoodervin.github.io/Weather-Dashboard/
 
+## Licence
+[![license information](https://img.shields.io/badge/license-MIT-blue)](https://github.com/mwoodervin/Code-Quiz/blob/master/LICENSE)
