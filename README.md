@@ -39,4 +39,4 @@ SO THAT I can plan
 https://mwoodervin.github.io/Weather-Dashboard/
 
 ## Licence
-[![license information](https://img.shields.io/badge/license-MIT-blue)](https://github.com/mwoodervin/Code-Quiz/blob/master/LICENSE)
+[![license information](https://img.shields.io/badge/license-MIT-blue)](https://github.com/mwoodervin/Weather-Dashboard/blob/master/LICENSE)
